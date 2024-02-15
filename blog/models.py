@@ -1,3 +1,46 @@
+import datetime
 from django.db import models
 
-# Create your models here.
+# This file is used for defining the models of our application.
+
+class Post(models.Model):
+    """
+    The model class for the posts table.
+    """
+    # class Meta:
+    #     db_name = "posts"
+
+    title = models.CharField(max_length=255, null=False)
+    author = models.CharField(max_length=255, null=True)
+    pub_date = models.DateTimeField("date published", null=False)
+    tags = models.ManyToManyField("Tag", related_name="posts")
+    attachments = models.ManyToManyField("Attachment", related_name="posts")
+
+    def __str__(self) -> str:
+        return "{" + f"title={self.title}, author={self.author}, pub_date={self.pub_date}" + "}"
+
+
+class Tag(models.Model):
+    """
+    The model class for the tags table.
+    """
+    # class Meta:
+    #     db_name = "tags"
+
+    name = models.CharField(max_length=31, primary_key=True)
+    color = models.CharField(max_length=6)
+
+    def __str__(self) -> str:
+        return "{%s}" % self.name
+    
+
+class Attachment(models.Model):
+    
+    # class Meta:
+    #     db_name = "attachments"
+    
+    file = models.FileField(upload_to="attachments/")
+    description = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.description
