@@ -4,7 +4,7 @@ from django.http import HttpResponse
 class IndexPage:
     @staticmethod
     def as_view(request):
-        return HttpResponse("<h1>Test</h1>")
+        return render(request, "blog/index.html")
     
 class WorksheetPage:
     @staticmethod
