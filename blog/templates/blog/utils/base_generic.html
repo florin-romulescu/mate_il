@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Name of the website{% endblock %}</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'blog/style/style.css' %}">
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <h1 class="mb-0">{% block headerTitle %}Page name{% endblock %}</h1>
+            <p class="lead mb-0">{% block quote %}Quote{% endblock %}</p>
+            <button class="btn btn-primary mt-3">{% block headerButton %}Button{% endblock %}</button>
+        </div>
+    </header>
+    <main class="py-5">
+        <div class="container">
+            {% block content %}
+                <p>Here is the content of this page.</p>
+            {% endblock %}
+        </div>
+    </main>
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            &copy; {% now "Y" %} Name of the website
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
