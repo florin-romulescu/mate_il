@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+
+from .models import Post
 
 class IndexPage:
     @staticmethod
@@ -20,3 +23,10 @@ class BlogPage:
     @staticmethod
     def as_view(request):
         return HttpResponse("<h1>Blog</h1>")
+    
+class DetailsPage:
+    @staticmethod
+    def as_view(request, blog_id):
+        post = get_object_or_404(Post, pk=blog_id)
+        
+        return HttpResponse(f"<h1>{post.title}</h1>")
