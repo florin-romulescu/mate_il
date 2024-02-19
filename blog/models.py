@@ -13,11 +13,11 @@ class Post(models.Model):
     title = models.CharField(max_length=255, null=False)
     author = models.CharField(max_length=255, null=True)
     pub_date = models.DateTimeField("date published", null=False)
-    tags = models.ManyToManyField("Tag", related_name="posts")
-    attachments = models.ManyToManyField("Attachment", related_name="posts")
+    tags = models.ManyToManyField("Tag", related_name="posts", blank=True)
+    attachments = models.ManyToManyField("Attachment", related_name="posts", blank=True)
 
     def __str__(self) -> str:
-        return "{" + f"title={self.title}, author={self.author}, pub_date={self.pub_date}" + "}"
+        return f"\"{self.title}\" by {self.author}"
 
 
 class Tag(models.Model):
@@ -28,7 +28,7 @@ class Tag(models.Model):
     #     db_name = "tags"
 
     name = models.CharField(max_length=31, primary_key=True)
-    color = models.CharField(max_length=6)
+    color = models.CharField(max_length=6, null=False)
 
     def __str__(self) -> str:
         return "{%s}" % self.name
@@ -40,7 +40,7 @@ class Attachment(models.Model):
     #     db_name = "attachments"
     
     file = models.FileField(upload_to="attachments/")
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=False)
 
     def __str__(self) -> str:
         return self.description
