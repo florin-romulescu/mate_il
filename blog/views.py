@@ -29,4 +29,4 @@ class DetailsPage:
     def as_view(request, blog_id):
         post = get_object_or_404(Post, pk=blog_id)
         
-        return HttpResponse(f"<h1>{post.title}</h1>")
+        return render(request, "blog/details.html", context={"post" : post})
