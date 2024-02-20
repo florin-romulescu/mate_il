@@ -6,5 +6,9 @@
 {% block headerButton %} Vezi evenimente {% endblock %}
 
 {% block content %}
-    Aici vor veni fisierele de descarcat.
+    <ul>
+    {% for post in post_list %}
+        <li>[{{ post.pub_date }}] {{ post.title }} by {{ post.author }}
+    {% endfor %}
+    </ul>
 {% endblock %}

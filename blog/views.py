@@ -6,10 +6,14 @@ from .models import Post
 
 class IndexPage:
     template_name = "blog/index.html"
+    numberOfPosts = 5
+    context = {}
     
     @staticmethod
     def as_view(request):
-        return render(request, IndexPage.template_name)
+        last_posts = Post.objects.order_by("-pub_date")[:IndexPage.numberOfPosts]
+        IndexPage.context["post_list"] = last_posts
+        return render(request, IndexPage.template_name, IndexPage.context)
     
 class WorksheetPage:
     @staticmethod
