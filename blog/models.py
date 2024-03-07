@@ -7,8 +7,6 @@ class Post(models.Model):
     """
     The model class for the posts table.
     """
-    # class Meta:
-    #     db_name = "posts"
 
     title = models.CharField(max_length=255, null=False)
     author = models.CharField(max_length=255, null=True)
@@ -24,8 +22,6 @@ class Tag(models.Model):
     """
     The model class for the tags table.
     """
-    # class Meta:
-    #     db_name = "tags"
 
     name = models.CharField(max_length=31, primary_key=True)
     color = models.CharField(max_length=6, null=False)
@@ -35,9 +31,6 @@ class Tag(models.Model):
     
 
 class Attachment(models.Model):
-    
-    # class Meta:
-    #     db_name = "attachments"
     
     file = models.FileField(upload_to="attachments/")
     description = models.CharField(max_length=255, null=False)
