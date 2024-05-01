@@ -1,14 +1,1 @@
 {% extends 'blog/utils/base_generic.html' %}
-
-{% block title %} Mate IL {% endblock %}
-{% block headerTitle %} Evenimente {% endblock %}
-{% block quote %} "Matematica nu se referă la numere, ecuații, calcule sau algoritmi: este despre înțelegere." {% endblock %}
-{% block headerButton %} Vezi evenimente {% endblock %}
-
-{% block content %}
-    <ul>
-    {% for post in post_list %}
-        <li>[{{ post.pub_date }}] {{ post.title }} by {{ post.author }}
-    {% endfor %}
-    </ul>
-{% endblock %}

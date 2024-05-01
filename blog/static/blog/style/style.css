@@ -1,46 +1,94 @@
-/* styles.css */
-
-/* Header */
-header {
-    background-color: #343a40; /* Dark gray background */
-    color: #fff; /* White text */
-    padding: 20px 0; /* Padding top and bottom, no padding left and right */
+* {
+  padding: 0;
+  margin: 0;
 }
 
-.header-title {
-    font-size: 2.5rem; /* Larger font size */
-    margin-bottom: 10px; /* Bottom margin */
+.search-form {
+  margin-left: 1rem;
+  width: 100%;
 }
 
-.header-quote {
-    font-style: italic; /* Italic font style */
+.searchbar {
+  width: 75%;
 }
 
-.header-button {
-    background-color: #007bff; /* Blue button background */
-    border: none; /* No border */
-    color: #fff; /* White text */
-    padding: 10px 20px; /* Padding inside button */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition */
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
-.header-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+.space-between {
+  justify-content: space-between;
 }
 
-/* Main Content */
-main {
-    padding: 20px; /* Padding inside main */
-    height: 100vh;
+/* Set the size of the top bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #111;
+  padding: 10px 20px;
+  z-index: 2;
 }
 
-/* Footer */
-footer {
-    background-color: #343a40; /* Dark gray background */
-    color: #fff; /* White text */
-    padding: 20px 0; /* Padding top and bottom, no padding left and right */
-    text-align: center; /* Center-align text */
+
+/* Set the size of the sidebar */
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
+/* The sidebar links */
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content */
+#main {
+  margin-top: 2rem;
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+/* Adjust the main content to allow the sidebar to hover over it */
+@media screen and (max-width: 768px) {
+  #main {
+      position: absolute;
+      width: 100%;
+      margin-left: 0;
+      transition: margin-left 0.5s;
+  }
+}

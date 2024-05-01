@@ -1,38 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="container-fluid">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Name of the website{% endblock %}</title>
-    {% load static %}
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'blog/style/style.css' %}">
-</head>
-<body>
-    <header class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <h1 class="mb-0">{% block headerTitle %}Page name{% endblock %}</h1>
-            <p class="lead mb-0">{% block quote %}Quote{% endblock %}</p>
-            <button class="btn btn-primary mt-3">{% block headerButton %}Button{% endblock %}</button>
-        </div>
-    </header>
-    <main class="py-5">
-        <div class="container">
-            {% block content %}
-                <p>Here is the content of this page.</p>
-            {% endblock %}
-        </div>
-    </main>
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            &copy; {% now "Y" %} Name of the website
-        </div>
-    </footer>
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retractable Sidebar</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wJZsv4zEzIo0eBfKysx1PUm5E1C9xW/2nJ2RlA/fkrz2KRps3Xtskk1v99OD6wXw" crossorigin="anonymous">
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'blog/style/style.css' %}">
+</head>
+<body class="container fluid">
+
+
+
+<!-- Sidebar -->
+<div class="sidebar" id="mySidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+</div>
+
+<div class="top-bar container">
+    <div class="row space-between">
+        <button class="btn btn-primary me-2" onclick="toggleNav()"><i class="bi bi-list"></i></button>
+        <form class="d-flex container-fluid search-form">
+            <input class="form-control me-2 searchbar" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<!-- Page content -->
+<div id="main">
+    <h2>Main Content</h2>
+    <p>This is the main content of the page. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec libero ac nulla fermentum luctus. Mauris luctus velit non lorem convallis, vel ullamcorper sapien accumsan. Donec quis gravida nisi. Nulla facilisi. Sed non hendrerit ex. Nullam ac ligula varius, efficitur est eget, dapibus elit. In hac habitasse platea dictumst. Fusce id nunc vitae quam convallis scelerisque.</p>
+</div>
+
+<!-- Bootstrap JS and custom script -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-xhhgKLz0BJXSLTdNd6R9ayGEZ4F1S79Li2PAFfJ2tMxR9HGMcggcv0qewc8Agw5y" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-uj1I+qC2tq7UQQkqd+IYmiQjPqrE1EIdR4t0FCJ4IfBYtX5Q2cZUxQ/1Z6vYm2kZ" crossorigin="anonymous"></script>
+<script>
+    function toggleNav() {
+        const sidebar = document.getElementById("mySidebar");
+        const main = document.getElementById("main");
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            main.style.marginLeft = "0";
+        } else {
+            sidebar.style.width = "250px";
+            main.style.marginLeft = "250px";
+        }
+    }
+
+    function closeNav() {
+        const sidebar = document.getElementById("mySidebar");
+        const main = document.getElementById("main");
+        sidebar.style.width = "0";
+        main.style.marginLeft = "0";
+    }
+</script>
 </body>
 </html>
