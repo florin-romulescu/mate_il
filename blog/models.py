@@ -6,6 +6,13 @@ from django.db import models
 class Post(models.Model):
     """
     The model class for the posts table.
+    
+    Attributes:
+        - title: An unique name for the post
+        - author: The name of the person who uploaded the file
+        - pub_date: When the file was uploaded
+        - tags: All the tags related to this post
+        - attachments: Al the attachments related to this post
     """
 
     title = models.CharField(max_length=255, null=False)
@@ -21,6 +28,11 @@ class Post(models.Model):
 class Tag(models.Model):
     """
     The model class for the tags table.
+    
+    Attributes:
+        - name: The name assigned to the color
+        - color: a hex string to represent a color (example ffe1a7)
+        - posts: all the posts that uses this tag (from many to many relationship)
     """
 
     name = models.CharField(max_length=31, primary_key=True)
@@ -31,6 +43,14 @@ class Tag(models.Model):
     
 
 class Attachment(models.Model):
+    """
+    The model class for the attachments table.
+    
+    Attributes:
+        - file: The representation of the file in the os
+        - description: A representative description of this file
+        - posts: all the posts that uses this attachment (from many to many relationship)
+    """
     
     file = models.FileField(upload_to="attachments/")
     description = models.CharField(max_length=255, null=False)
