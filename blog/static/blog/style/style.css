@@ -3,92 +3,72 @@
   margin: 0;
 }
 
-.search-form {
-  margin-left: 1rem;
-  width: 100%;
+main {
+  margin-top: 5rem;
 }
 
-.searchbar {
-  width: 75%;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-.space-between {
-  justify-content: space-between;
-}
-
-/* Set the size of the top bar */
 .top-bar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #111;
-  padding: 10px 20px;
-  z-index: 2;
+  background-color: white;
+  border: 1px solid #00000000;
+  box-shadow: 0px 2px 10px #9A9A9A;
+  z-index: 999;
 }
 
-
-/* Set the size of the sidebar */
-.sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: auto;
+  background-color: #607274;
+  border: 1px solid #00000000;
+  border-radius: 7px;
 }
 
-/* The sidebar links */
-.sidebar a {
-  padding: 10px 15px;
-  text-decoration: none;
+.test {
+  background-color: #333;
+  height: 80vh;
+}
+
+.logo {
+  font-size: 25px;
+  color: white;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: bolder;
+  color: white;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.quote {
   font-size: 20px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+  color: white;
+  font-style: italic;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidebar a:hover {
-  color: #f1f1f1;
+.main-btn {
+  background-color: #FAEED1;
+  color: #607274;
+  font-weight: bold;
 }
 
-/* Position and style the close button (top right corner) */
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+.main-btn:hover {
+  background-color: #607274;
+  color: #FAEED1;
 }
 
-/* Style page content */
-#main {
-  margin-top: 2rem;
-  transition: margin-left .5s;
-  padding: 16px;
+.badge {
+  background-color: #DDD;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+.post {
+  box-shadow: 0px 2px 10px #DDD;
 }
 
-/* Adjust the main content to allow the sidebar to hover over it */
-@media screen and (max-width: 768px) {
-  #main {
-      position: absolute;
-      width: 100%;
-      margin-left: 0;
-      transition: margin-left 0.5s;
-  }
+.button-color {
+  background-color: #607274;
+  color: white;
+  font-weight: bolder;
 }
