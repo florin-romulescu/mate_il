@@ -15,11 +15,21 @@ class Post(models.Model):
         - attachments: Al the attachments related to this post
     """
 
-    title = models.CharField(max_length=255, null=False)
+    title = models.TextField(default="", null=False)
     author = models.CharField(max_length=255, null=True)
+    description = models.TextField(default="", null=False)
     pub_date = models.DateTimeField("date published", null=False)
     tags = models.ManyToManyField("Tag", related_name="posts", blank=True)
     attachments = models.ManyToManyField("Attachment", related_name="posts", blank=True)
+    image = models.ImageField(upload_to="images/", blank=True, null=True)
+    
+    @property
+    def short_description(self) -> str:
+        MAX_LENTH:int = 400
+        return (
+                self.description[:MAX_LENTH] + "..." if len(self.description) > MAX_LENTH
+                else self.description
+                )
 
     def __str__(self) -> str:
         return f"\"{self.title}\" by {self.author}"

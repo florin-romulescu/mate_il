@@ -8,7 +8,7 @@ admin_site = AdminSite(name="mate_il")
 
 class PostAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("Post Information", {"fields" : ["title", "author", "pub_date"]}),
+        ("Post Information", {"fields" : ["title", "author", "description", "pub_date", "image"]}),
         ("Tags", {"fields" : ["tags"], "classes" : ["collapse"]}),
         ("Attachments", {"fields" : ["attachments"], "classes" : ["collapse"]})
     ]
