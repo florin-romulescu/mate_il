@@ -72,3 +72,14 @@ main {
   color: white;
   font-weight: bolder;
 }
+
+a {
+  color: #607274;
+  text-decoration: none;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
