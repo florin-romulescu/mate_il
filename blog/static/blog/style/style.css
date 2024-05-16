@@ -59,8 +59,13 @@ main {
   color: #FAEED1;
 }
 
-.badge {
+.badge-btn {
   background-color: #DDD;
+  color: white;
+
+  height: 30px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .post {
@@ -82,4 +87,35 @@ a {
   display: flex;
   justify-content: center;
   align-content: center;
+}
+
+#sidebar {
+  height: 100%;
+  width: 250px; /* Default width of sidebar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  padding-top: 60px; /* Adjust as needed */
+  transition: all 0.3s;
+}
+
+#sidebar.active {
+  width: 0; /* Collapse sidebar when it's closed */
+}
+
+/* Toggle button style */
+#sidebarCollapse {
+  position: fixed;
+  top: 20px;
+  left: 10px;
+  z-index: 9999;
+  display: none; /* Initially hide on larger screens */
+}
+
+/* Show toggle button on smaller screens */
+@media (max-width: 768px) {
+  #sidebarCollapse {
+    display: block;
+  }
 }

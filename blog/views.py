@@ -14,12 +14,15 @@ class IndexPage:
     context = {}
     
     post_name_key = "search-bar"
+    classe_keys = ["Clasa a V-a", "Clasa a VI-a", "Clasa a VII-a",
+                   "Clasa a VIII-a", "Clasa a IX-a", "Clasa a X-a",
+                   "Clasa a XI-a", "Clasa a XII-a"]
     tag_key = "tag"
     
     @staticmethod
     def as_view(request):
         sorted_posts = Post.objects.order_by("-pub_date")
-        last_posts = sorted_posts[:IndexPage.numberOfPosts]
+        years:list[int] = [datetime.now().date().year - i for i in range(8) ]
         
         tags = Tag.objects.all()[:16]
         if request.method == 'POST':
@@ -27,16 +30,54 @@ class IndexPage:
             if IndexPage.post_name_key in request.POST:
                 #filter by name
                 search: str = request.POST[IndexPage.post_name_key]
-                last_posts = filter(lambda post: search.lower() in post.title.lower(), last_posts)
+                sorted_posts = list(filter(lambda post: search.lower() in post.title.lower(), sorted_posts))
                 IndexPage.context["search"] = search
                 
+            classes_sorted_posts = []
+            flag_classes: bool = False
+            for class_key in IndexPage.classe_keys:
+                if class_key in request.POST:
+                    flag_classes = True
+                    for post in sorted_posts:
+                        if class_key in map(lambda el: el.name, post.tags.all()):
+                            classes_sorted_posts.append(post)
+                           
+            years_sorted_posts = [] 
+            flag_years: bool = False
+            for year_key in years:
+                if str(year_key) in request.POST:
+                    flag_years = True
+                    for post in sorted_posts:
+                        if post.pub_date.year == year_key:
+                            years_sorted_posts.append(post)
+                            
+            
+            if not flag_classes:
+                filtered_sorted_posts = years_sorted_posts
+            elif not flag_years:
+                filtered_sorted_posts = classes_sorted_posts
+            else:               
+                filtered_sorted_posts = [post for post in classes_sorted_posts
+                                              for post_p in years_sorted_posts
+                                              if post == post_p]
+                            
+            print(request.POST.keys())
+            print(filtered_sorted_posts, flag_classes, flag_years)
+            if flag_classes or flag_years: sorted_posts = list(filtered_sorted_posts)
+            
             if IndexPage.tag_key in request.POST:
-                #filter by tags
-                pass
+                tag = request.POST[IndexPage.tag_key]
+                filtered_sorted_posts = []
+                for post in sorted_posts:
+                    print(post.tags.all())
+                    if tag in map(lambda tag: tag.name, post.tags.all()):
+                        filtered_sorted_posts.append(post)
+                sorted_posts = list(filtered_sorted_posts)
         
+        last_posts = sorted_posts[:IndexPage.numberOfPosts]
         IndexPage.context["post_list"] = last_posts
         IndexPage.context["tags"] = tags
-        IndexPage.context["years"] = [datetime.now().date().year - i for i in range(8) ]
+        IndexPage.context["years"] = years
         return render(request, IndexPage.template_name, IndexPage.context)
     
 class WorksheetPage:
