@@ -30,6 +30,10 @@ class Post(models.Model):
                 self.description[:MAX_LENTH] + "..." if len(self.description) > MAX_LENTH
                 else self.description
                 )
+        
+    @classmethod
+    def get_posts_by_tag(cls, tag_name:str):
+        return cls.objects.filter(tags__name = tag_name)
 
     def __str__(self) -> str:
         return f"\"{self.title}\" by {self.author}"
@@ -46,7 +50,14 @@ class Tag(models.Model):
     """
 
     name = models.CharField(max_length=31, primary_key=True)
-    color = models.CharField(max_length=6, null=False)
+    
+    @property
+    def short_name(self) -> str:
+        MAX_LENGTH: int = 6
+        return (
+            self.name[:MAX_LENGTH] + '...' if len(self.name) > MAX_LENGTH
+            else self.name
+        )
 
     def __str__(self) -> str:
         return "{%s}" % self.name
