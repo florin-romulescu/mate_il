@@ -119,3 +119,21 @@ a {
     display: block;
   }
 }
+
+.contact-section {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #333;
+}
+.contact {
+  margin-bottom: 20px;
+  color: #DDD;
+}
+.contact p {
+  margin: 5px 0;
+}
+.contact a {
+  color: #3498db;
+  text-decoration: none;
+}
