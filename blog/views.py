@@ -11,6 +11,7 @@ import io, zipfile
 class IndexPage:
     template_name = "blog/index.html"
     numberOfPosts = 5
+    slice = 0
     context = {}
     
     post_name_key = "search-bar"
@@ -22,10 +23,11 @@ class IndexPage:
     @staticmethod
     def as_view(request):
         sorted_posts = Post.objects.order_by("-pub_date")
-        years:list[int] = [datetime.now().date().year - i for i in range(8) ]
+        years:list[int] = [datetime.now().date().year - i for i in range(8)]
         
         tags = Tag.objects.all()[:16]
         if request.method == 'POST':
+            IndexPage.slice=0
             # Handle the search filter
             if IndexPage.post_name_key in request.POST:
                 #filter by name
@@ -73,11 +75,17 @@ class IndexPage:
                     if tag in map(lambda tag: tag.name, post.tags.all()):
                         filtered_sorted_posts.append(post)
                 sorted_posts = list(filtered_sorted_posts)
+        elif request.method == 'GET':
+            if "next" in request.GET:
+                IndexPage.slice = min(IndexPage.slice + 1, (len(sorted_posts) - 1) // IndexPage.numberOfPosts)
+            elif "prev" in request.GET:
+                IndexPage.slice = max(IndexPage.slice - 1, 0)
         
-        last_posts = sorted_posts[:IndexPage.numberOfPosts]
+        last_posts = sorted_posts[IndexPage.slice * IndexPage.numberOfPosts : (IndexPage.slice+1) * IndexPage.numberOfPosts]
         IndexPage.context["post_list"] = last_posts
         IndexPage.context["tags"] = tags
         IndexPage.context["years"] = years
+        IndexPage.context["slice"] = IndexPage.slice
         return render(request, IndexPage.template_name, IndexPage.context)
     
 class DetailsPage:

@@ -163,9 +163,14 @@
                         </div> <!-- END POST -->
                         {% endfor %}
                     </div>
+                    <div class="row mt-5 mh-1 container justify-content-between">
+                        <a class="btn btn-lg main-btn col-1" href="{% url 'blog:index' %}?prev={{ slice }}">Prev</a>
+                        <a class="btn btn-lg main-btn col-1" href="{% url 'blog:index' %}?next={{ slice }}">Next</a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </main>
 
     <footer class="contact-section container-fluid text-center">
@@ -174,16 +179,6 @@
             <p><strong>Name:</strong> John Doe</p>
             <p><strong>Email:</strong> <a href="mailto:johndoe@example.com">johndoe@example.com</a></p>
             <p><strong>Phone:</strong> (123) 456-7890</p>
-        </div>
-        <div class="contact">
-            <p><strong>Name:</strong> Jane Smith</p>
-            <p><strong>Email:</strong> <a href="mailto:janesmith@example.com">janesmith@example.com</a></p>
-            <p><strong>Phone:</strong> (098) 765-4321</p>
-        </div>
-        <div class="contact">
-            <p><strong>Name:</strong> Emily Johnson</p>
-            <p><strong>Email:</strong> <a href="mailto:emilyjohnson@example.com">emilyjohnson@example.com</a></p>
-            <p><strong>Phone:</strong> (555) 123-4567</p>
         </div>
     </footer>
 </body>
