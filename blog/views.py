@@ -80,22 +80,6 @@ class IndexPage:
         IndexPage.context["years"] = years
         return render(request, IndexPage.template_name, IndexPage.context)
     
-class WorksheetPage:
-    
-    @staticmethod
-    def as_view(request):
-        return HttpResponse("<h1>Worksheet</h1>")
-    
-class ExercisesPage:
-    @staticmethod
-    def as_view(request):
-        return HttpResponse("<h1>Exercises</h1>")
-    
-class BlogPage:
-    @staticmethod
-    def as_view(request):
-        return HttpResponse("<h1>Blog</h1>")
-    
 class DetailsPage:
     template_name = "blog/details.html"
     
